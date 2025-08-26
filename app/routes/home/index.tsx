@@ -8,5 +8,7 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
+  console.log('Hello from home...');
+  
   return <section>My App</section>
 }

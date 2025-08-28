@@ -3,6 +3,14 @@ import type { Route } from "./+types/index";
 import type { Project } from "~/types";
 import ProjectCard from "~/component/ProjectCard";
 import Pagination from "~/component/Pagination";
+import { AnimatePresence, motion } from "framer-motion";
+
+export function meta({}: Route.MetaArgs) {
+  return [
+    { title: "The Friendly Dev | Projects" },
+    { name: "description", content: "My website project portfolio" },
+  ];
+}
 
 export async function loader({request}: Route.LoaderArgs):Promise<{projects: Project[]}> {
   const res = await fetch('http://localhost:8000/projects');
@@ -39,7 +47,7 @@ const ProjectsPage = ({loaderData}: Route.ComponentProps) => {
   
   return (
     <>
-        <h2 className='text-3xl font-bold mb-8'>Projects</h2>
+        <h2 className='text-3xl font-bold mb-8 text-white'>Projects</h2>
 
         <div className="flex flex-wrap gap-2 mb-8">
           {categories.map((category) => (
@@ -51,11 +59,17 @@ const ProjectsPage = ({loaderData}: Route.ComponentProps) => {
             </button>
           ))}
         </div>
-        <div className="grid gap-6 sm:grid-cols-2">
-          {currentProjects.map((project) => (
-            <ProjectCard key={project.id} project={project}/>
-          ))}
-        </div>
+
+        <AnimatePresence mode="wait">
+          <motion.div layout className="grid gap-6 sm:grid-cols-2">
+            {currentProjects.map((project) => (
+              <motion.div key={project.id} layout>
+              <ProjectCard key={project.id} project={project}/>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
+        
 
         <Pagination 
         totalPages={totalPages} 

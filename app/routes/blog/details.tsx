@@ -43,7 +43,7 @@ const BlogPostDetailsPage = ({loaderData}: BlogPostDetailsPageProps) => {
         <h1 className='text-3xl font-bold text-blue-400 mb-2'>
             {postMeta.title}
         </h1>
-        <p className='text-sm text-gray-400 mb-6'>{new Date(postMeta.date).toLocaleDateString()}</p>
+        <p className='text-sm text-gray-400 mb-6'>{new Date(postMeta.date).toDateString()}</p>
         <div className="prose prose-invert max-w-none mb-12">
             <ReactMarkdown>{markdown}</ReactMarkdown>
         </div>

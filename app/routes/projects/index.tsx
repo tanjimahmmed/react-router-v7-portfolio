@@ -1,6 +1,6 @@
-import { useState } from "react";;
+import { useState } from "react";
 import type { Route } from "./+types/index";
-import type { Project } from "~/types";
+import type { Project, StrapiProject, StrapiResponse } from "~/types";
 import ProjectCard from "~/component/ProjectCard";
 import Pagination from "~/component/Pagination";
 import { AnimatePresence, motion } from "framer-motion";
@@ -14,7 +14,8 @@ export function meta({}: Route.MetaArgs) {
 
 export async function loader({request}: Route.LoaderArgs):Promise<{projects: Project[]}> {
   const res = await fetch(`${import.meta.env.VITE_API_URL}/projects?populate=*`);
-  const json = await res.json();
+
+  const json:StrapiResponse<StrapiProject> = await res.json();
 
   const projects = json.data.map((item) => ({
     id: item.id,

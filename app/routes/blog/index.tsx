@@ -1,11 +1,11 @@
 import { useState } from "react";
 import type { Route } from "./+types/index";
-import type { PostMeta, StrapiResponse, StrapiProject, StrapiPost } from "~/types";
+import type { Post, StrapiResponse, StrapiProject, StrapiPost } from "~/types";
 import PostCard from "~/component/PostCard";
 import Pagination from "~/component/Pagination";
 import PostFilter from "~/component/PostFilter";
 
-export async function loader({request}: Route.LoaderArgs): Promise<{posts: PostMeta[]}> {
+export async function loader({request}: Route.LoaderArgs): Promise<{posts: Post[]}> {
   const res = await fetch(`${import.meta.env.VITE_API_URL}/posts?populate=image&sort=date:desc`);
 
   if(!res.ok) throw new Error('Failed to fetch data')

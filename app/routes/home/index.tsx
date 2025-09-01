@@ -33,7 +33,7 @@ export async function loader({request}: Route.LoaderArgs): Promise<{projects: Pr
     documentId: item.documentId,
     title: item.title,
     description: item.description,
-    image: item.image?.url ? `${import.meta.env.VITE_STRAPI_URL}${item.image.url}` : '/images/no-image.png',
+    image: item.image?.url ? `${item.image.url}` : '/images/no-image.png',
     url: item.url,
     date: item.date,
     category: item.category,
@@ -46,7 +46,7 @@ export async function loader({request}: Route.LoaderArgs): Promise<{projects: Pr
     slug: item.slug,
     excerpt: item.excerpt,
     body: item.body,
-    image: item.image?.url ? `${import.meta.env.VITE_STRAPI_URL}${item.image.url}` : '/images/no-image.png',
+    image: item.image?.url ? `${item.image.url}` : '/images/no-image.png',
     date: item.date,
   }))
 
